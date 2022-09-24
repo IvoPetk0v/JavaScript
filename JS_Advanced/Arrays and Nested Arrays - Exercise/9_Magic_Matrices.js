@@ -28,7 +28,8 @@ console.log(solve([
 console.log(solve([
 [11, 32, 45],
 [21, 0, 1],
-[21, 1, 1]])); // false 
+[21, 1, 1]]
+)); // false 
 
 console.log(solve([
 [1, 0, 0],
