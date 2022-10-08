@@ -5,8 +5,8 @@ function solve() {
    function onClick() {
 
       input = JSON.parse(document.getElementById("inputs").children[1].value);
-      let bestRestP = document.getElementById("bestRestaurant").children[2];
-      let bestWorkerP = document.getElementById("workers").children[2];
+      let bestRestP = document.querySelector("#bestRestaurant p");
+      let bestWorkerP = document.querySelector("#workers p");
       let listOfRest = [];
 
       class Restaurant {
@@ -47,14 +47,19 @@ function solve() {
 
             workerList.push(new Worker(currWorker[0], Number(currWorker[1])));
          }
-
-         if (listOfRest.includes(r => r.name === restName)) {
-            rest = listOfRest.find(r => r.name === restName);
-            rest.workers.concat(workerList);
-         } else {
-            listOfRest.push(new Restaurant(restName, workerList));
+         let isSame = false;
+         for (const rest of listOfRest) {
+            if (rest.name === restName) {
+               rest.workers=rest.workers.concat(workerList);
+               isSame = true;
+               break;
+            }
          }
 
+         if (!isSame) {
+            listOfRest.push(new Restaurant(restName, workerList));
+         }
+         debugger;
       });
       let maximum = Math.max.apply(Math, listOfRest.map(r => r.AverrageSalary()));
       let winnerRest = listOfRest.find(e => e.AverrageSalary() == maximum);
@@ -63,7 +68,7 @@ function solve() {
       winnerRest.workers.sort((a, b) => (a.salay > b.salary) ? 1 : ((a.salary > b.salary) ? -1 : 0));
       let bestWorker = "";
       winnerRest.workers.forEach(element => {
-         bestWorker += `Name: ${element.name} With Salary: ${element.salary}` + "<br>";
+         bestWorker += `Name: ${element.name} With Salary: ${element.salary} `;
       });
       bestWorkerP.innerHTML = bestWorker;
    }
