@@ -32,10 +32,10 @@ validate({
     uri: 'svn.public.catalog',
     version: 'HTTP/1.1',
     message: ''
-});
+}); // valid 
 validate({
     method: 'OPTIONS',
     uri: 'git.master',
     version: 'HTTP/1.1',
     message: '-recursive'
-  });
+  }); // invalide method 
