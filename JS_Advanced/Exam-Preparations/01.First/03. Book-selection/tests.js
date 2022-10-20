@@ -28,6 +28,11 @@ describe("testing func isItAffordable", () => {
             bookSelection.isItAffordable(3, {}), new Error("Invalid input");
         });
     });
+    it("both param should be number type", () => {
+        assert.throw(() => {
+            bookSelection.isItAffordable([], {}), new Error("Invalid input");
+        });
+    });
     it("should return not enough money if price is higher than budget", () => {
         assert.equal(bookSelection.isItAffordable(3, 2), "You don't have enough money");
         assert.equal(bookSelection.isItAffordable(3, 2), "You don't have enough money");
@@ -43,23 +48,48 @@ describe("testing func suitableTitles", () => {
         assert.throw(() => {
             bookSelection.suitableTitles("books", "wantedGenre"), new Error("Invalid input")
         });
+        assert.throw(() => {
+            bookSelection.suitableTitles(1, "wantedGenre"), new Error("Invalid input")
+        });
+        assert.throw(() => {
+            bookSelection.suitableTitles({}, "wantedGenre"), new Error("Invalid input")
+        });
     });
     it("second param must be string type", () => {
         assert.throw(() => {
-            bookSelection.suitableTitles("books", []), new Error("Invalid input")
+            bookSelection.suitableTitles([], []), new Error("Invalid input")
+        });
+         assert.throw(() => {
+            bookSelection.suitableTitles([], 1), new Error("Invalid input")
+        });
+        assert.throw(() => {
+            bookSelection.suitableTitles([], {}), new Error("Invalid input")
+        });
+    });
+    it("both params must be correct type", () => {
+        assert.throw(() => {
+            bookSelection.suitableTitles({}, []), new Error("Invalid input")
+        });
+        assert.throw(() => {
+            bookSelection.suitableTitles("{}", []), new Error("Invalid input")
         });
     });
     it("should return correctly array of obj filtered by genre prop", () => {
-        bookSelection.suitableTitles([{title: "The Da Vinci Code", genre: "Thriller"},
-        {title: "Darkness", genre: "Horror"},
-        {title: "IT", genre: "Horror"}], 'Horror'),["Darkness","IT"]
+        bookSelection.suitableTitles([{ title: "The Da Vinci Code", genre: "Thriller" },
+        { title: "Darkness", genre: "Horror" },
+        { title: "IT", genre: "Horror" }], 'Horror'), ["Darkness", "IT"]
     });
     it("should return correctly array of obj filtered by genre prop", () => {
-        bookSelection.suitableTitles([{title: "The Da Vinci Code", genre: "Thriller"},
-        {title: "Darkness", genre: "Horror"}], 'Horror'),["Darkness"]
+        bookSelection.suitableTitles([{ title: "The Da Vinci Code", genre: "Thriller" },
+        { title: "Darkness", genre: "Horror" }], 'Horror'), ["Darkness"]
+    });
+    it("should return correctly array of obj filtered by genre prop", () => {
+        bookSelection.suitableTitles([{ title: "The Da Vinci Code", genre: "Horror" },
+        { title: "Darkness", genre: "Horror" }], 'Horror'), ["The Da Vinci Code","Darkness"]
     });
     it("should return empty array of obj filtered by genre prop", () => {
-        bookSelection.suitableTitles([{title: "The Da Vinci Code", genre: "Thriller"},
-        {title: "Darkness", genre: "Horror"}], 'NoSuchGenre'),[]
+        bookSelection.suitableTitles([{ title: "The Da Vinci Code", genre: "Thriller" },
+        { title: "Darkness", genre: "Horror" }], 'NoSuchGenre'), []
     });
+    
 })
