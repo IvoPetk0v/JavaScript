@@ -9,11 +9,11 @@ function attachEvents() {
 
     const enumIcons =
     {
-        "Sunny": "&#x2600",// ☀
+        "Sunny": "&#x2600",         // ☀
         "Partly sunny": "&#x26C5", //⛅
-        "Overcast": "&#x2601", // ☁
-        "Rain": "&#x2614",// ☂
-        "Degrees": "&#176"   // °
+        "Overcast": "&#x2601",    // ☁
+        "Rain": "&#x2614",       // ☂
+        "Degrees": "&#176"      // °
     }
 
     async function getWeather() {
