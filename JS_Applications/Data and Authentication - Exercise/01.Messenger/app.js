@@ -10,7 +10,7 @@ function attachEvents() {
 }
 
 attachEvents();
-async function onRefresh(e) {
+async function onRefresh() {
     textArea.textContent = "";
     let result = await loadMsgs();
     textArea.textContent = result;
